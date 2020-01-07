@@ -89,9 +89,12 @@
     "stream-browserify": "2.0.1",
     "style-loader": "0.20.3",
     "timezone-mock": "1.0.0",
-    "webpack": "4.1.1",
+    "webpack": "^4.41.5",
     "webpack-cli": "2.0.9",
-    "webpack-dev-server": "3.2.1"
+    "webpack-dev-server": "^3.9.0"
   },
-  "author": "ui@nutanix.com"
+  "author": "ui@nutanix.com",
+  "dependencies": {
+    "package.json": "^2.0.1"
+  }
 }

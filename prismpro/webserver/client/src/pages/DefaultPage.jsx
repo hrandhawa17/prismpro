@@ -53,8 +53,10 @@ class DefaultPage extends Component {
   }
 
   renderStep1() {
+    console.log("start of renderstep1", this.state)
     const { pcIp, ppvm, ppvmIp, password } = this.state;
-    const isValidPcIp = isValidIP(pcIp);
+    console.log("second step in renderstep1", { pcIp, ppvm, ppvmIp, password })
+    const isValidPcIp = isValidIP(pcIp);    
     return (
       <StackingLayout>
         <Title size="h3">Setup: Initialize Server</Title>
@@ -160,7 +162,7 @@ class DefaultPage extends Component {
     );
   }
 
-  renderEntityPicker(label, helpText, isPPVM) {
+  renderEntityPicker(label, helpText, isPPVM) {    
     const { pcIp, password } = this.state;
     const isValidPcIp = isValidIP(pcIp);
     const attr = isPPVM ? 'ppvm' : 'vm';
@@ -219,6 +221,7 @@ class DefaultPage extends Component {
   }
 
   completeCurrentStep() {
+    
     const { step, pcIp, ppvmIp, ppvm, password } = this.state;
     this.setState({
       loading: false,
@@ -276,7 +279,7 @@ class DefaultPage extends Component {
             this.setState({
               loading: false,
               showAlertSuccess: true,
-              step: 3
+              step: 3              
             });
           }
         }).catch(e => {

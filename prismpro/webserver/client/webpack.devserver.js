@@ -10,7 +10,8 @@ const devServerConfig = Object.assign({}, config, {
   devServer: {
     https: false,
     proxy: {
-      "/": "http://localhost:3010"
+      // "/": "http://10.45.32.162:8080"
+       "/":"http://localhost:8080"
     },
     port: 3005
   },

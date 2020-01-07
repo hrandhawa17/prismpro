@@ -125,6 +125,10 @@ export default class EntitySearch extends React.Component {
      */
     idAttr: PropTypes.string,
     /**
+     * Optional name attribute to use instead of vm_name.
+     */
+    nameAttr: PropTypes.string,
+    /**
      * Optional function handler for selection.
      */
     onSelect: PropTypes.func,
@@ -177,7 +181,7 @@ export default class EntitySearch extends React.Component {
       const entityResults = _.get(response.data, 'group_results[0].entity_results');
       const results = entityResults && entityResults.map(result => {
         const data = extractGroupsData(result);
-        const itemName = data.vm_name;
+        const itemName = data[this.props.nameAttr || 'vm_name'];
         const itemId = data[idAttr];
         return {
           value: itemId,
@@ -245,14 +249,17 @@ export default class EntitySearch extends React.Component {
    * @returns {Promise} - Fetch response Promise
    */
   fetchResults(query) {
-    let filter = query ? `vm_name==.*${caseInsensitiveRegex(query)}.*` : '';
+    const { nameAttr, entityType, pcIp, password} = this.props;
+    let filter = query ? `${ nameAttr || 'vm_name' }==.*${caseInsensitiveRegex(query)}.*` : '';
     return basicFetch({
-      url: `vms/`,
+      url: `groups/`,
       method: 'POST',
       data: JSON.stringify({
-        filter: filter,
-        pcIp: this.props.pcIp,
-        password: this.props.password
+        entityType,
+        nameAttr: nameAttr || 'vm_name',
+        filter,
+        pcIp,
+        password
       })
     }).then(resp => {
       if (resp && resp.data && resp.data.error) {
@@ -261,7 +268,7 @@ export default class EntitySearch extends React.Component {
         });
       } else if (!resp || !resp.data) {
         this.props.onError({
-          message: 'Failed to query VMs. Check to make sure your PC IP is entered correctly.'
+          message: entityType === 'vm' ? 'Failed to query VMs. Check to make sure your PC IP is entered correctly.' : 'There was an error making the request'
         });
       }
       return Promise.resolve(resp);

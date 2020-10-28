@@ -63,7 +63,7 @@ Now let’s look at how we can take automated action to resolve some of these in
 
 #. Navigate to your **`Initials`-LinuxToolsVM**. The examples will use a VM called **ABC - LinuxToolsVM**.
 
-   .. figure:: images/LinuxVM Initial Memory.png
+   .. figure:: images/lvm.png
 
 #. Note the current **Memory Capacity** of the VM, as we will later increase it with X-Play. You may need to scroll down within the **Properties** widget to find this value.
 

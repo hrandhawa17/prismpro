@@ -27,26 +27,20 @@ logical_timestamp: 0
 rackable_unit_list {
   rackable_unit_id: 3
   rackable_unit_model: 100
-  rackable_unit_model_name: "NX-1065-G4"
-  rackable_unit_uuid: "3"
-}
-rackable_unit_list {
-  rackable_unit_id: 4
-  rackable_unit_model: 100
-  rackable_unit_model_name: "HX7500"
-  rackable_unit_uuid: "4"
+  rackable_unit_model_name: "NX-3060-G5"
+  rackable_unit_uuid: "0cfd21c9-c941-4772-84dd-2caec6cb5a53"
 }
 node_list {
   service_vm_id: 5
   node_status: kNormal
-  service_vm_external_ip: ""
+  service_vm_external_ip: "10.1.1.2"
   cassandra_token_id: "FV000000oxDzDNIwiRf60E7wT0NJJxWgpdDH7DFjxZ9q2Lqx5sdXYyAnhTaq"
   zookeeper_myid: 2
   uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc31"
   rackable_unit_id: 3
   node_position: 1
   cassandra_status: kNormalMode
-  software_version: "el6-release-danube-4.6-stable-0fe2e9d69ffa036b76ec661b8c22eaf034742e55"
+  software_version: "el7.3-release-euphrates-5.16.1.2-stable-40f323397468564100c13cae5be145a8b5409233"
   node_serial: "ZM144S037403"
   management_server_id: 64
   acropolis_status {
@@ -56,20 +50,20 @@ node_list {
   last_known_metadata_disk_id: 69
   cassandra_compaction_pending: false
   cluster_uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc3c"
-  rackable_unit_uuid: "3"
+  rackable_unit_uuid: "0cfd21c9-c941-4772-84dd-2caec6cb5a53"
   management_server_uuid: "f829fb6f-256c-4e4c-926b-d5e469c62139"
 }
 node_list {
   service_vm_id: 6
   node_status: kNormal
-  service_vm_external_ip: ""
+  service_vm_external_ip: "10.1.1.3"
   cassandra_token_id: "FV000000oxDzDNIwiRf60E7wT0NJJxWgpdDH7DFjxZ9q2Lqx5sdXYyAnhTaq"
   zookeeper_myid: 2
   uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc32"
   rackable_unit_id: 3
   node_position: 1
   cassandra_status: kNormalMode
-  software_version: "el6-release-danube-4.6-stable-0fe2e9d69ffa036b76ec661b8c22eaf034742e55"
+  software_version: "el7.3-release-euphrates-5.16.1.2-stable-40f323397468564100c13cae5be145a8b5409233"
   node_serial: "ZM144S037403"
   management_server_id: 64
   acropolis_status {
@@ -79,20 +73,20 @@ node_list {
   last_known_metadata_disk_id: 69
   cassandra_compaction_pending: false
   cluster_uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc3c"
-  rackable_unit_uuid: "3"
+  rackable_unit_uuid: "0cfd21c9-c941-4772-84dd-2caec6cb5a53"
   management_server_uuid: "f829fb6f-256c-4e4c-926b-d5e469c62139"
 }
 node_list {
   service_vm_id: 7
   node_status: kNormal
-  service_vm_external_ip: ""
+  service_vm_external_ip: "10.1.1.4"
   cassandra_token_id: "FV000000oxDzDNIwiRf60E7wT0NJJxWgpdDH7DFjxZ9q2Lqx5sdXYyAnhTaq"
   zookeeper_myid: 2
   uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc33"
   rackable_unit_id: 3
   node_position: 2
   cassandra_status: kNormalMode
-  software_version: "el6-release-danube-4.6-stable-0fe2e9d69ffa036b76ec661b8c22eaf034742e55"
+  software_version: "el7.3-release-euphrates-5.16.1.2-stable-40f323397468564100c13cae5be145a8b5409233"
   node_serial: "ZM144S037403"
   management_server_id: 64
   acropolis_status {
@@ -102,20 +96,20 @@ node_list {
   last_known_metadata_disk_id: 69
   cassandra_compaction_pending: false
   cluster_uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc3c"
-  rackable_unit_uuid: "3"
+  rackable_unit_uuid: "0cfd21c9-c941-4772-84dd-2caec6cb5a53"
   management_server_uuid: "f829fb6f-256c-4e4c-926b-d5e469c62139"
 }
 node_list {
   service_vm_id: 8
   node_status: kNormal
-  service_vm_external_ip: ""
+  service_vm_external_ip: "10.1.1.5"
   cassandra_token_id: "FV000000oxDzDNIwiRf60E7wT0NJJxWgpdDH7DFjxZ9q2Lqx5sdXYyAnhTaq"
   zookeeper_myid: 2
   uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc34"
   rackable_unit_id: 3
   node_position: 1
   cassandra_status: kNormalMode
-  software_version: "el6-release-danube-4.6-stable-0fe2e9d69ffa036b76ec661b8c22eaf034742e55"
+  software_version: "el7.3-release-euphrates-5.16.1.2-stable-40f323397468564100c13cae5be145a8b5409233"
   node_serial: "ZM144S037403"
   management_server_id: 64
   acropolis_status {
@@ -125,10 +119,10 @@ node_list {
   last_known_metadata_disk_id: 69
   cassandra_compaction_pending: false
   cluster_uuid: "825a0ffc-0dfa-499c-b49e-143102a4bc3c"
-  rackable_unit_uuid: "3"
+  rackable_unit_uuid: "0cfd21c9-c941-4772-84dd-2caec6cb5a53"
   management_server_uuid: "f829fb6f-256c-4e4c-926b-d5e469c62139"
 }
-release_version: "el6-release-danube-4.6-stable-0fe2e9d69ffa036b76ec661b8c22eaf034742e55"
+release_version: "el7.3-release-euphrates-5.16.1.2-stable-40f323397468564100c13cae5be145a8b5409233"
 cluster_fault_tolerance_state {
   current_max_fault_tolerance: 1
   desired_max_fault_tolerance: 1
@@ -138,10 +132,10 @@ acropolis_ha_config {
   num_host_failures_to_tolerate: 0
 }
 cluster_functions: 1
-cluster_uuid: "18887-massey__18887"
-cluster_name: "massey"
+cluster_uuid: "00057d50-00df-b390-0000-00000000eafd"
+cluster_name: "Prism-Pro-Cluster"
 extended_nfs_fhandle_enabled: true
-ncc_version: "ncc-2.2.0"
+ncc_version: "ncc-999.0.0"
 """
 
 class ZeusUtil:

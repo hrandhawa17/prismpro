@@ -69,7 +69,7 @@ Now let’s look at how we can take automated action to resolve some of these in
 
    .. figure:: images/navigateplaybook.png
 
-#.  We will need to create a couple of Playbooks for this workflow to be possible. Let's start by clicking **Create Playbook**. We will first be creating the Playbook that will be increasing the Memory of the VM. We want to create a playbook that reads in a string coming from the ticket system (approved or denied in our case) and have conditional branching and execution of the next steps accordingly. 
+#. We will need to create a couple of Playbooks for this workflow to be possible. Let's start by clicking **Create Playbook**. We will first be creating the Playbook that will be increasing the Memory of the VM. We want to create a playbook that reads in a string coming from the ticket system (approved or denied in our case) and have conditional branching and execution of the next steps accordingly. 
 
    .. figure:: images/rs3b.png
 
@@ -85,7 +85,7 @@ Now let’s look at how we can take automated action to resolve some of these in
 
    .. figure:: images/addparse.png
 
-#.  Use the **Parameters** link to fill in the **string5** parameter exposed from the webhook trigger. In our example this will be the condition passed in from the call. We have the format options for JSON, XML and Regex. This example we’ll use a JSON path. Fill in the other fields according to the screen below. Then click Add Action to add the next action.
+#. Use the **Parameters** link to fill in the **string5** parameter exposed from the webhook trigger. In our example this will be the condition passed in from the call. We have the format options for JSON, XML and Regex. This example we’ll use a JSON path. Fill in the other fields according to the screen below. Then click Add Action to add the next action.
 
    .. figure:: images/editparse.png
 

@@ -61,23 +61,19 @@ Increase Constrained VM Memory with X-Play based on Conitional Execution
 
 Now let’s look at how we can take automated action to resolve some of these inefficiencies. For this lab we will assume that this VM is constrained for memory, and will show how we can automatically remediate the right sizing of this VM. We will also use a custom ticket system to give an idea of how this typical workflow could integrate with ticketing system such as ServiceNow and use string parsing and conditional execution, two of our latest capabilities added into X-Play 
 
-#. Navigate to your **`Initials`-LinuxToolsVM**. The examples will use a VM called **ABC - LinuxToolsVM**.
+#. Navigate to your **`Initials`-LinuxToolsVM**. The examples will use a VM called **ABC - LinuxToolsVM**. Note the current **Memory Capacity** of the VM, as we will later increase it with X-Play. You may need to scroll down within the **Properties** widget to find this value.
 
    .. figure:: images/linuxvm.png
 
-#. Note the current **Memory Capacity** of the VM, as we will later increase it with X-Play. You may need to scroll down within the **Properties** widget to find this value.
-
-   .. figure:: images/rs2.png
-
 #. Using the hamburger menu, navigate to **Operations** > **Playbooks**.
 
-   .. figure:: images/rs3.png
+   .. figure:: images/navigateplaybook.png
 
-#.  We will need to create a couple Playbooks for this workflow to be possible. Let's start by clicking **Create Playbook**. We will first be creating the Playbook that will be increasing the Memory of the VM. We want to create a playbook that reads in a string coming from the ticket system (approved or denied in our case) and have conditional branching and execution of the next steps accordingly. 
+#.  We will need to create a couple of Playbooks for this workflow to be possible. Let's start by clicking **Create Playbook**. We will first be creating the Playbook that will be increasing the Memory of the VM. We want to create a playbook that reads in a string coming from the ticket system (approved or denied in our case) and have conditional branching and execution of the next steps accordingly. 
 
    .. figure:: images/rs3b.png
 
-#. Select **Webhook** as the trigger. Using this trigger exposes a public API that allows scripts and third party tools such as ServiceNow to use this Webhook to call back into Prism Central and trigger this playbook. In our case, this Playbook will be called by the ticket system to initiate the remediation steps.
+#. Select **Webhook** as the trigger. Using this trigger exposes a public API that allows scripts and third party tools such as ServiceNow to use this Webhook to call back into Prism Central and trigger this playbook. In our case, this Playbook will be called by the ticket system to initiate conditional execution.
 
    .. figure:: images/rs16.png
 
@@ -85,11 +81,21 @@ Now let’s look at how we can take automated action to resolve some of these in
 
    .. figure:: images/rs17.png
 
-#. So the first action we choose will be the newly added String Parse action. Use the **Parameters** link to fill in the **string5** parameter exposed from the webhook trigger. In our example this will be the condition passed in from the call. We have the format options for JSON, XML and Regex. This example we’ll use a JSON path. Fill in the other fields according to the screen below.
+#. So the first action we choose will be the newly added String Parse action.
 
-   .. figure:: images/rs18.png
+   .. figure:: images/addparse.png
 
-#. Now we’ll add our first condition - Add the Branch action. We will use the **IF** condition and choose our Operand as the **Parsed String** from the previous action using the parameters link. Fill in the other fields according to the screen below. We can also add a description to the branch action for easier readability 
+#.  Use the **Parameters** link to fill in the **string5** parameter exposed from the webhook trigger. In our example this will be the condition passed in from the call. We have the format options for JSON, XML and Regex. This example we’ll use a JSON path. Fill in the other fields according to the screen below. Then click Add Action to add the next action.
+
+   .. figure:: images/editparse.png
+
+#. Now we’ll add our first condition - Select the Branch action.
+
+   .. figure:: images/addbranch.png
+
+#. We will use the **IF** condition and choose our Operand as the **Parsed String** from the previous action using the **Parameters** link. Fill in the other fields according to the screen below. We can also add a description to the branch action for easier readability. 
+
+   .. figure:: images/editbranch.png
 
 #. Now we'll add the actions we want to execute if the condition is true. The first one is to add memory to the VM. Use the **Parameters** link to fill in the **entity1** parameter which is exposed from the Webhook trigger. The caller will pass in the VM to act on as entity1. Set the remainder of the fields according to the screen below. Then click **Add Action** to add the next action.
 

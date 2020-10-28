@@ -56,30 +56,12 @@ Using machine learning, Prism Pro then analyzes the data and applies a classific
    * **Automation:** Use some other method of automation such as powershell or REST-API to resize a VM.
 
 
-   Using this machine learning data, Prism Pro is also able to generate baselines, or expected ranges, for VM, Host and Cluster metric data. The X-FIT alogrithms learn the normal behavior of these entities and represent that as a baseline range on the different charts. Whenever a metric value deviates from this expected range, Prism Pro will raise an anomaly.
+Increase Constrained VM Memory with X-Play based on Conitional Execution
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#. Now let's take a take a look at a VM by searching for ‘bootcamp_good’ and selecting ‘bootcamp_good_1’.
+Now let’s look at how we can take automated action to resolve some of these inefficiencies. For this lab we will assume that this VM is constrained for memory, and will show how we can automatically remediate the right sizing of this VM. We will also use a custom ticket system to give an idea of how this typical workflow could integrate with ticketing system such as ServiceNow and use string parsing and conditional execution, two of our latest capabilities added into X-Play 
 
-   .. figure:: images/ppro_61.png
-
-#. Go to Metrics > CPU Usage. Notice a dark blue line, and a lighter blue area around it. The dark blue line is the CPU Usage. The light blue area is the expected CPU Usage range for this VM. This particular VM is running an application that is upgraded at the same time each day, which explains the usage pattern. Notice that X-FIT detects the seasonality in this usage pattern and has adjusted the expected range accordingly. In this case, an anomaly has been raised for this VM, because the Usage is far above the expected range. You can also reduce the time range “Last 24 hours” to examine the chart more closely.
-
-   .. figure:: images/ppro_60.png
-
-#. Click **“Alert Setting”** to set an alert policy for this kind of situation.
-
-#. In the right hand side, you can change some of the configurations however you would like. In this example I have changed the Behavioral Anomaly threshold to ignore anomalies between 10% and 70%. All other anomalies will generate a Warning alert. I have also adjusted the Static threshold to Alert Critical if the CPU Usage on this VM exceeds 95%.
-
-   .. figure:: images/ppro_25.png
-
-#. Hit **Cancel** to exit the policy creation workflow.
-
-Automatically Increase Constrained VM Memory with X-Play
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Now let's look at how we can take automated action to resolve some of these inefficiencies. For this lab we will assume that this VM is constrained for memory and will show how we can automatically remediate the right sizing of this VM. We will also use a custom Ticket system to give an idea of how this typical workflow could integrate with ticketing system such as Service Now.
-
-#. Navigate to your **`Initials`-LinuxToolsVM**. The examples will use a VM called **ABC - VM**.
+#. Navigate to your **`Initials`-LinuxToolsVM**. The examples will use a VM called **ABC - LinuxToolsVM**.
 
    .. figure:: images/rs1.png
 
@@ -91,7 +73,7 @@ Now let's look at how we can take automated action to resolve some of these inef
 
    .. figure:: images/rs3.png
 
-#.  We will need to create a couple Playbooks for this workflow to be possible. Let's start by clicking **Create Playbook**. We will first be creating the Playbook that will be increasing the Memory of the VM.
+#.  We will need to create a couple Playbooks for this workflow to be possible. Let's start by clicking **Create Playbook**. We will first be creating the Playbook that will be increasing the Memory of the VM. We want to create a playbook that reads in a string coming from the ticket system (approved or denied in our case) and have conditional branching and execution of the next steps accordingly. 
 
    .. figure:: images/rs3b.png
 
@@ -103,11 +85,13 @@ Now let's look at how we can take automated action to resolve some of these inef
 
    .. figure:: images/rs17.png
 
-#. Next we would like to select the **VM Add Memory** action.
+#. So the first action we choose will be the newly added String Parse action. Use the **Parameters** link to fill in the **string5** parameter exposed from the webhook trigger. In our example this will be the condition passed in from the call. We have the format options for JSON, XML and Regex. This example we’ll use a JSON path. Fill in the other fields according to the screen below.
 
    .. figure:: images/rs18.png
 
-#. Use the **Parameters** link to fill in the **entity1** parameter which is exposed from the Webhook trigger. The caller will pass in the VM to act on as entity1. Set the remainder of the fields according to the screen below. Then click **Add Action** to add the next action.
+#. Now we’ll add our first condition - Add the Branch action. We will use the **IF** condition and choose our Operand as the **Parsed String** from the previous action using the parameters link. Fill in the other fields according to the screen below. We can also add a description to the branch action for easier readability 
+
+#. Now we'll add the actions we want to execute if the condition is true. The first one is to add memory to the VM. Use the **Parameters** link to fill in the **entity1** parameter which is exposed from the Webhook trigger. The caller will pass in the VM to act on as entity1. Set the remainder of the fields according to the screen below. Then click **Add Action** to add the next action.
 
    .. figure:: images/rs19.png
 
@@ -140,9 +124,20 @@ Now let's look at how we can take automated action to resolve some of these inef
 
    .. figure:: images/rs21.png
 
+#. Now we’ll add the 2nd condition - **Else**. We could also add **Else If** we wanted to use other operands. For now we’ll use just Else. 
+
+#. On this condition we just want to send out an email notifying the user that the request has been denied and the memory was not added. Click **Add Action** and choose the Email action.
+
+#. Fill in the field in the email action. Here are the examples.
+
+   - **Recipient:** - Fill in your email address.
+   - **Subject:** - ``Playbook {{playbook.playbook_name}} was executed.``
+   - **Message:** - 
+
 #. Click **Save & Close** button and save it with a name “*Initials* - Resolve Service Ticket”. **Be sure to enable the ‘Enabled’ toggle.**
 
    .. figure:: images/rs22.png
+
 
 #. Next we will create a custom action to be used in our 2nd playbook. Click on **Action Gallery** from the left hand side menu.
 
@@ -214,7 +209,17 @@ Now let's look at how we can take automated action to resolve some of these inef
 
    .. figure:: images/rs25.png
 
-#. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Trigger Remediation** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the information for the VM and Alert that triggered the workflow.
+#. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Deny** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Denied** workflow. You should receive an email within a few minutes with the message inout for this condition.
+
+#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. Click on the title of the Play in the table to take a closer look.
+
+   .. figure:: images/rs29.png
+
+#. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
+
+   .. figure:: images/rs30.png
+
+#. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Approve** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Denied** workflow. It will also pass on the information for the VM and Alert that triggered the workflow so the following actions to add memory and resolve alert are also execited. 
 
    .. figure:: images/rs26.png
 

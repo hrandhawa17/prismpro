@@ -97,17 +97,13 @@ Now let’s look at how we can take automated action to resolve some of these in
 
    .. figure:: images/editbranch.png
 
-#. Now we'll add the actions we want to execute if the condition is true. The first one is to add memory to the VM. Use the **Parameters** link to fill in the **entity1** parameter which is exposed from the Webhook trigger. The caller will pass in the VM to act on as entity1. Set the remainder of the fields according to the screen below. Then click **Add Action** to add the next action.
+#. Now we'll add the actions we want to execute if the condition is true. The first one is to add memory to the VM. Click add **Add Action** and select the **VM Add Memory** action. Use the **Parameters** link to fill in the **entity1** parameter which is exposed from the Webhook trigger. The caller will pass in the VM to act on as entity1. Set the remainder of the fields according to the screen below. Then click **Add Action** to add the next action.
 
-   .. figure:: images/rs19.png
+   .. figure:: images/addmemory.png
 
-#. Select the **Resolve Alert** action.
+#. Select the **Resolve Alert** action. Use the **Parameters** link to fill in the **entity2** parameter which is exposed from the Webhook trigger. The caller will pass the Alert to be resolved as entity2. Then click **Add Action** and choose the Email action.
 
-   .. figure:: images/rs19b.png
-
-#. Use the **Parameters** link to fill in the **entity2** parameter which is exposed from the Webhook trigger. The caller will pass the Alert to be resolved as entity2. Then click **Add Action** and choose the Email action.
-
-   .. figure:: images/rs19c.png
+   .. figure:: images/resolvealert.png
 
 #. Fill in the field in the email action. Here are the examples.
 
@@ -119,30 +115,31 @@ Now let’s look at how we can take automated action to resolve some of these in
 
       You are welcome to compose your own subject message. The above is just an example. You could use the “parameters” to enrich the message.
 
-   .. figure:: images/rs20.png
+   .. figure:: images/approvedemail.png
 
-#. Last, we would like to call back to the ticket service to resolve the ticket in the ticket service. Click **Add Action** to add the REST API action. Fill in the following values replacing the <PrismOpsLabUtilityServer_IP_ADDRESS> in the URL field.
+#. Now, we would like to call back to the ticket service to resolve the ticket in the ticket service. Click **Add Action** to add the REST API action. Fill in the following values replacing the <PrismOpsLabUtilityServer_IP_ADDRESS> in the URL field. This condcludes our first conditional branch for an approved request.
 
    - **Method:** PUT
    - **URL:** http://<PrismOpsLabUtilityServer_IP_ADDRESS>/resolve_ticket
    - **Request Body:** ``{"incident_id":"{{trigger[0].entity1.uuid}}"}``
    - **Request Header:** Content-Type:application/json;charset=utf-8
 
-   .. figure:: images/rs21.png
+   .. figure:: images/resolveticket.png
 
-#. Now we’ll add the 2nd condition - **Else**. We could also add **Else If** we wanted to use other operands. For now we’ll use just Else. 
+#. Now we’ll add the 2nd condition for when the request is denied. Click **Add Action** and choose the **Branch** action. We will use the **Else** condition. We could also add **Else If** we wanted to use other operands. For now we’ll use just Else. We can also add a description for the Branch. 
 
-#. On this condition we just want to send out an email notifying the user that the request has been denied and the memory was not added. Click **Add Action** and choose the Email action.
+   .. figure:: images/elsebranch.png
 
-#. Fill in the field in the email action. Here are the examples.
+#. On this condition we just want to send out an email notifying the user that the request has been denied and the memory was not added. Click **Add Action** and choose the Email action. Fill in the field in the email action. Here are the examples.
 
    - **Recipient:** - Fill in your email address.
-   - **Subject:** - ``Playbook {{playbook.playbook_name}} was executed.``
-   - **Message:** - 
+   - **Subject:** - ``Memory Increase Request Denied``
+   - **Message:** - ``The request to increase the memory of your VM {{trigger[0].entity1.name}} by 1 GB was denied. If you'd like to review the ticket please navigate to http://<PrismOpsLabUtilityServer_IP_ADDRESS>/ticketsystem``
+
+   .. figure:: images/deniedemail.png
 
 #. Click **Save & Close** button and save it with a name “*Initials* - Resolve Service Ticket”. **Be sure to enable the ‘Enabled’ toggle.**
 
-   .. figure:: images/rs22.png
 
 
 #. Next we will create a custom action to be used in our 2nd playbook. Click on **Action Gallery** from the left hand side menu.

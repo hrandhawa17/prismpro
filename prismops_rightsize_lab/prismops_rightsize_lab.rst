@@ -166,7 +166,7 @@ Now let’s look at how we can take automated action to resolve some of these in
 
 #. We will need to copy the Webhook ID from the first Playbook we created so that it can be passed in the generate ticket step. Open up your Resolve Service Ticket playbook and copy the Webhook ID to your clipboard.
 
-   .. figure:: images/rs6a.png
+   .. figure:: images/webhookid.png
 
 #. Now we will create a Playbook to automate the generation of a service ticket. Close your Playbook and then click **Create Playbook** at the top of the table view.
 
@@ -182,11 +182,11 @@ Now let’s look at how we can take automated action to resolve some of these in
 
 #. Select the *Specify VMs* radio button and choose the VM you created for the lab. This will make it so only alerts raised on your VM will trigger this Playbook.
 
-   .. figure:: images/rs10.png
+   .. figure:: selectvm.png
 
 #. First, we would like to generate a ticket for this alert. Click **Add Action** on the left side and select the **Generate Service Ticket** action you created. Notice the details from the **Generate Service Ticket** Action you created are automatically filled in for you. Go ahead and replace the **<ENTER_ID_HERE>** text with the Webhook ID you copied to your clipboard.
 
-   .. figure:: images/rs11.png
+   .. figure:: images/serviceticket.png
 
 #. Next we would like to notify someone that the ticket was created by X-Play. Click **Add Action** and select the Email action. Fill in the field in the email action. Here are the examples. Be sure to replace <PrismOpsLabUtilityServer_IP_ADDRESS> in the message with it's IP Address.
 
@@ -202,45 +202,41 @@ Now let’s look at how we can take automated action to resolve some of these in
 
 #. Now let's trigger the workflow. Navigate to the tab you opened in the setup with the **/alerts** URL [example 10.38.17.12/alerts]. Select the Radio for **VM Memory Constrained** and input your VM. Click the **Simulate Alert** button. This will simulate a memory constrained alert on your VM.
 
-   .. figure:: images/rs23.png
+   .. figure:: images/alertsimulate.png
 
 #. You should recieve an email to the email address you put down in the first playbook. It may take up to 5 minutes.
 
-   .. figure:: images/rs24.png
+   .. figure:: images/ticketemail.png
 
 #. Inside the email click the link to visit the ticket system. Alternatively you can directly access the ticket system by navigating to http://`<PrismOpsLabUtilityServer_IP_ADDRESS>`/ticketsystem from a new tab in your browser.
 
-   .. figure:: images/rs25.png
+   .. figure:: images/ticketsystem.png
 
-#. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Deny** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Denied** workflow. You should receive an email within a few minutes with the message inout for this condition.
+#. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Deny** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Denied** workflow. You should receive an email within a few minutes with the message input for this condition.
 
-#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. Click on the title of the Play in the table to take a closer look.
+   .. figure:: images/ticketoption.png
 
-   .. figure:: images/rs29.png
 
-#. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
+#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded by clicking to show more details for each item. If there were any errors, they would also be surfaced in this view.
 
-   .. figure:: images/rs30.png
+   .. figure:: images/deniedplay.png
 
-#. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Approve** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Denied** workflow. It will also pass on the information for the VM and Alert that triggered the workflow so the following actions to add memory and resolve alert are also execited. 
 
-   .. figure:: images/rs26.png
+#. Now navigate ack to the ticket system either using the link in the email or going directly to the URL. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Approve** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Denied** workflow. It will also pass on the information for the VM and Alert that triggered the workflow so the following actions to add memory and resolve alert are also execited. 
 
-#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. Click on the title of the Play in the table to take a closer look.
+   .. figure:: images/ticketoption.png
 
-   .. figure:: images/rs29.png
+#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
 
-#. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
-
-   .. figure:: images/rs30.png
+   .. figure:: images/approvedbranch.png
 
 #. You can navigate back to your VM and verify that the Memory was indeed increased by 1 GiB.
 
-   .. figure:: images/rs31.png
+   .. figure:: images/finalmemory.png
 
 #. You should also get an email telling you that the playbook ran.
 
-   .. figure:: images/rs32.png
+   .. figure:: images/successemail.png
 
 Takeaways
 .........

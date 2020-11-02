@@ -6,7 +6,9 @@ Application Monitoring with Prism Ultimate
 
 Prism Pro brings smart automation to our customer’s daily IT operations. The typical operations workflow is a continuous cycle of monitoring, analyzing and taking action where necessary. Prism Pro mirrors traditional IT Admin's workflows to improve operations efficiency. With Prism Pro, IT Admins are able to connect insights from machine data to automate this typical flow using the power of the machine learning engine X-FIT and the X-Play automation engine.
 
-In this lab you will learn how Prism Pro can help IT Admins monitor, analyze and automatically act when a VM's memory resource is constrained.
+**ADD Prism Ultimate/SQL Monitoring note here.** 
+
+In this lab you will learn how Prism Ultimate can help IT Admins monitor, analyze and automatically act when a SQL Server's performance is imapcted.
 
 Lab Setup
 +++++++++
@@ -26,3 +28,26 @@ Lab Setup
 #. In a separate tab, navigate to http://`<PrismOpsLabUtilityServer_IP_ADDRESS>`/ to complete the lab from [example http://10.38.17.12/]. Use the UI at this URL to complete the lab.
 
    .. figure:: images/init3.png
+
+
+SQL Server Monitoring with Prism Ultimate
++++++++++++++++++++++++++++++++++++++++++++
+
+Prism Ultimate use ...............................
+
+
+#. Go to Integrations from the Prism Central home page
+
+**ADD IMAGE**
+
+
+#. Click **Get Started** to start setting up a monitoring integration. 
+
+   .. figure:: images/appmonitoring 1.png
+
+**ENABLE DATA PROVIDER ?**
+
+#. Click configure instances
+
+   .. figure:: images/appmonitoring 2.png
+

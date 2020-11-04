@@ -111,7 +111,7 @@ Prism Ultimate use ...............................
 
 #. Use the **Parameters** link to get the parsed string from the previous action i.e. the VM IP for the IP Address/Hostname field. Provide the SQL VM credentials which are **Username: Administrator** and **Password: Nutanix/4u**. Provide the folliwng path to script and repalce <Name> with your name so you can recognize your log file in the google drive. 
 
-   - **JSON Path:** C:\\Users\\Administrator\\Desktop\\UploadToGDrive.ps1 -id <Name>
+      - **JSON Path:** C:\\Users\\Administrator\\Desktop\\UploadToGDrive.ps1 -id <Name>
 
   .. figure:: images/sqlplay7.png
 
@@ -121,12 +121,65 @@ Prism Ultimate use ...............................
 
 #. In the email we want to let teh user know that a alert has been raised and a log file has been uploaded to a google drive link that we will provide so they can take a look. Fill in the following fields
 
-  - **Recipient:** - Fill in your email address.
-   - **Subject :** - ``X-PLay notification for {{trigger[0].alert_entity_info.name}}``
-   - **Message:** - ``TThis is a message from Prism Pro X-Play. Logs have been collected for your SQL server due to a high buffer pool size event and are available for you at https://drive.google.com/drive/folders/1e4hhdCydQ5pjEKMXUoxe0f35-uYshnLZ?usp=sharing``
+      - **Recipient:** - Fill in your email address.
+      - **Subject :** - ``X-PLay notification for {{trigger[0].alert_entity_info.name}}``
+      - **Message:** - ``TThis is a message from Prism Pro X-Play. Logs have been collected for your SQL server due to a high buffer pool size event and are available for you at https://drive.google.com/drive/folders/1e4hhdCydQ5pjEKMXUoxe0f35-uYshnLZ?usp=sharing``
 
-  .. figure:: images/sqlplay8.png
+  .. figure:: images/sqlplay9.png
 
-#. Click **Save & Close** button and save it with a name “*Initials* - Generate Service Ticket for Constrained VM”. **Be sure to enable the ‘Enabled’ toggle.**
+#. Click **Save & Close** button and save it with a name “*Initials* - High Buffer Pool Size”. **Be sure to enable the ‘Enabled’ toggle.**
 
   .. figure:: images/sqlplay10.png
+
+#. Now let's trigger the workflow, login into your VM where the SQL Server is running. Credentials - **Username: Administrator** and **Password: Nutanix/4u**. 
+There is a *HammerDB* application already installed on the VM. In order to cause a spike in the metrics we will run a powershell script to create some users on the Server, Go to **PATH** and righy-click on the file **workload.ps1** and select **Run with Powershell** as shown in the figure below. 
+
+ .. figure:: images/hammerdb.png 
+
+#. It may take up to 5 minutes for the metrics to spike on the Server, you can skip to the **Appplication Discovery** section below in the meantime which should take roughly the same amount of time in which the policy is raised and the playbook is executed. 
+
+#. You should recieve an email to the email address you put down in the first playbook. It may take up to 5-10 minutes. 
+
+  .. figure:: images/sqlemail.png
+
+#. Click on the URL in the email to go to the google drive and confirm that the log file has been uploaded. 
+
+  .. figure:: images/sqllogfile.png
+
+#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - High Buffer Pool Size** Playbook that you created and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
+
+ .. figure:: images/sqlplay11.png
+
+
+Application Discovery with Prism Ultimate
++++++++++++++++++++++++++++++++++++++++++++
+
+Prism Ultimate use ...............................
+
+#. Using the hamburger menu navigate to **Operations > App Discovery**
+
+ .. figure:: images/appdiscovery1.png
+
+#. Once on the **App Discovery** page click on **Discover** to start discovering the apps running on your cluster. 
+
+ .. figure:: images/appdiscovery2.png
+
+#. Discovery will run and ive you a summary of the apps discovered and identified. You can run **Discover** periodically by coming to this page to identify new apps. 
+
+ .. figure:: images/appdiscovery3.png
+
+#. Going through the list of apps, you will see there is an **Unknown** app in the list. Select the app and click on **Actions** to setup a policy to identify the app. 
+
+ .. figure:: images/appdiscovery4.png
+
+#. You can identify this app by the Ports that will be auto-filled by Discovery. Name this app, example **Initials - My Special App** and click on **Save and Apply**. 
+
+ .. figure:: images/appdiscovery5.png
+
+#. Now you can see the identified app in your list and check that the new idetification policy you created has been added to the **Policies** list. Any future apps with these ports will be identified under the same policy. 
+
+**Image**
+
+#. Delete your policy so that the other users may setup their own. Go back to the apps list and confirm that the app you ahd idenitified is now **Unknown** again. 
+
+**Image** 

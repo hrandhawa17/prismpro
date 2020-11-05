@@ -81,27 +81,27 @@ Now let’s look at how we can take automated action to resolve some of these in
 
    .. figure:: images/rs17.png
 
-#. So the first action we choose will be the newly added String Parse action.
+#. The first action we will add is the newly added String Parse action. This action allows the user to parse data coming from a string which can then subsequently be used in the succeeding actions. 
 
    .. figure:: images/addparse.png
 
-#. Use the **Parameters** link to fill in the **string5** parameter exposed from the webhook trigger. In our example this will be the condition passed in from the call. We have the format options for JSON, XML and Regex. This example we’ll use a JSON path. Fill in the other fields according to the screen below. Then click Add Action to add the next action.
+#. Use the **Parameters** link to fill in the **string5** parameter exposed from the webhook trigger. In our example this will be the condition passed in from the API call. We have the format options for JSON, XML and Regex. This example we’ll use a JSON path. Fill in the other fields according to the screen below. Then click **Add Action** to add the next action.
 
    .. figure:: images/editparse.png
 
-#. Now we’ll add our first condition - Select the Branch action.
+#. Now we’ll add our first condition - Select the **Branch** action. This gives the ability to execute succeeding actions based on coditions and criteria matched.
 
    .. figure:: images/addbranch.png
 
-#. We will use the **IF** condition and choose our Operand as the **Parsed String** from the previous action using the **Parameters** link. Fill in the other fields according to the screen below. We can also add a description to the branch action for easier readability. 
+#. We will use the **IF** condition and choose our Operand as the **Parsed String** from the previous action using the **Parameters** link. Fill in the other fields according to the screen below. We can also add a description to the branch action for easier readability. Next we'll add the actions we want to execute if the condition is true. Click add **Add Action** once you have filled the fields for the **Branch** action.
 
    .. figure:: images/editbranch.png
 
-#. Now we'll add the actions we want to execute if the condition is true. The first one is to add memory to the VM. Click add **Add Action** and select the **VM Add Memory** action. Use the **Parameters** link to fill in the **entity1** parameter which is exposed from the Webhook trigger. The caller will pass in the VM to act on as entity1. Set the remainder of the fields according to the screen below. Then click **Add Action** to add the next action.
+#. First action we want to take is add memory to the VM. Select the **VM Add Memory** action. Use the **Parameters** link to fill in the **entity1** parameter which is exposed from the Webhook trigger. The caller will pass in the VM to act on as entity1. Set the remainder of the fields according to the screen below. Then click **Add Action** to add the next action.
 
    .. figure:: images/addmemory.png
 
-#. Select the **Resolve Alert** action. Use the **Parameters** link to fill in the **entity2** parameter which is exposed from the Webhook trigger. The caller will pass the Alert to be resolved as entity2. Then click **Add Action** and choose the Email action.
+#. Select the **Resolve Alert** action. Use the **Parameters** link to fill in the **entity2** parameter which is exposed from the Webhook trigger. The caller will pass the Alert to be resolved as entity2. Then click **Add Action** and choose the **Email** action.
 
    .. figure:: images/resolvealert.png
 
@@ -117,7 +117,7 @@ Now let’s look at how we can take automated action to resolve some of these in
 
    .. figure:: images/approvedemail.png
 
-#. Now, we would like to call back to the ticket service to resolve the ticket in the ticket service. Click **Add Action** to add the REST API action. Fill in the following values replacing the <PrismOpsLabUtilityServer_IP_ADDRESS> in the URL field. This condcludes our first conditional branch for an approved request.
+#. Now, we would like to call back to the ticket service to resolve the ticket in the ticket service. Click **Add Action** to add the **REST API** action. Fill in the following values replacing the <PrismOpsLabUtilityServer_IP_ADDRESS> in the URL field. This condcludes our first conditional branch for an approved request.
 
    - **Method:** PUT
    - **URL:** http://<PrismOpsLabUtilityServer_IP_ADDRESS>/resolve_ticket
@@ -126,11 +126,11 @@ Now let’s look at how we can take automated action to resolve some of these in
 
    .. figure:: images/resolveticket.png
 
-#. Now we’ll add the 2nd condition for when the request is denied. Click **Add Action** and choose the **Branch** action. We will use the **Else** condition. We could also add **Else If** we wanted to use other operands. For now we’ll use just Else. We can also add a description for the Branch. 
+#. Next we’ll add the 2nd condition for when the request is denied. Click **Add Action** and choose the **Branch** action. We will use the **Else** condition. We could also add **Else If** we wanted to use other operands. For now we’ll use just Else. We can also add a description for the Branch. 
 
    .. figure:: images/elsebranch.png
 
-#. On this condition we just want to send out an email notifying the user that the request has been denied and the memory was not added. Click **Add Action** and choose the Email action. Fill in the field in the email action. Here are the examples.
+#. On this condition we just want to send out an email notifying the user that the request has been denied and the memory was not added. Click **Add Action** and choose the **Email** action. Fill in the field in the email action. Here is an example.
 
    - **Recipient:** - Fill in your email address.
    - **Subject:** - ``Memory Increase Request Denied``
@@ -182,7 +182,7 @@ Now let’s look at how we can take automated action to resolve some of these in
 
 #. Select the *Specify VMs* radio button and choose the VM you created for the lab. This will make it so only alerts raised on your VM will trigger this Playbook.
 
-   .. figure:: selectvm.png
+   .. figure:: images/selectvm.png
 
 #. First, we would like to generate a ticket for this alert. Click **Add Action** on the left side and select the **Generate Service Ticket** action you created. Notice the details from the **Generate Service Ticket** Action you created are automatically filled in for you. Go ahead and replace the **<ENTER_ID_HERE>** text with the Webhook ID you copied to your clipboard.
 
@@ -217,16 +217,16 @@ Now let’s look at how we can take automated action to resolve some of these in
    .. figure:: images/ticketoption.png
 
 
-#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded by clicking to show more details for each item. If there were any errors, they would also be surfaced in this view.
+#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded by clicking to show more details for each item. If there were any errors, they would also be surfaced in this view. You can click on the **String Parser** action to confirmt that the right condition was passed in from the webhook.
 
    .. figure:: images/deniedplay.png
 
 
-#. Now navigate ack to the ticket system either using the link in the email or going directly to the URL. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Approve** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Denied** workflow. It will also pass on the information for the VM and Alert that triggered the workflow so the following actions to add memory and resolve alert are also execited. 
+#. Now navigate back to the ticket system either using the link in the denied email or going directly to http://`<PrismOpsLabUtilityServer_IP_ADDRESS>`/ticketsystem. Identify the ticket created for your VM, and click the vertical dots icon to show the Action menu. Click the **Approve** option. This will call the Webhook that was passed in the REST API to generate the service ticket, which will trigger the Resolve Service Ticket Playbook. It will pass on the condition for branching action and execute the **Approved** workflow. It will also pass on the information for the VM and Alert that triggered the workflow so the following actions to add memory and resolve alert are also executed. 
 
    .. figure:: images/ticketoption.png
 
-#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
+#. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - Resolve Service Ticket** Playbook and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view. You can click on the **String Parser** action to confirmt that the right condition was passed in from the webhook.
 
    .. figure:: images/approvedbranch.png
 
@@ -245,8 +245,8 @@ Takeaways
 
 - X-FIT is our machine learning engine to support smart IT OPS, including anomaly detection, and inefficiency detection.
 
-- X-Play, the IFTTT for the enterprise, is our engine to enable the automation of daily operations tasks.
-
 - X-Play enables admins to confidently automate their daily tasks within minutes.
 
 - X-Play is extensive that can use customer’s existing APIs and scripts as part of its Playbooks, and can integrate nicely with customers existing ticketing workflows.
+
+-X-Play can enable automation of daily operations tasks with a complete IFTTT workflow thanks to conditional execution.

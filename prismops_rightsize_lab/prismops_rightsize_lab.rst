@@ -249,4 +249,4 @@ Takeaways
 
 - X-Play is extensive that can use customer’s existing APIs and scripts as part of its Playbooks, and can integrate nicely with customers existing ticketing workflows.
 
--X-Play can enable automation of daily operations tasks with a complete IFTTT workflow thanks to conditional execution.
+- X-Play can enable automation of daily operations tasks with a complete IFTTT workflow thanks to conditional execution.

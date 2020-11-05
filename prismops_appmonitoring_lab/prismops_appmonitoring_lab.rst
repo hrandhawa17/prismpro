@@ -38,31 +38,32 @@ Prism Ultimate use ...............................
 
 #. Go to Integrations from the Prism Central home page
 
-   **ADD IMAGE**
-
+   .. figure:: images/appmonitoring0.png
 
 #. Click **Get Started** to start setting up a monitoring integration. 
 
    .. figure:: images/appmonitoring1.png
 
-
-#. Click configure instances
+#. This is the page where the your configured integrations would show up. Click on **Configure instances**.
 
    .. figure:: images/appmonitoring2.png
 
-#. Choose Microsoft SQL Server from the dropdown(the other option being vCenter) and click on enable Nutaix collector to start external metrics
+#. Choose **Microsoft SQL Server** from the dropdown(the other option being vCenter) and click on **Enable** so that the Nutanix collector can start collecting external metrics. 
 
    .. figure:: images/appmonitoring3.png
 
-#. Choose your SQL VM IP from the dropdown list 
+#. Choose your SQL VM Host IP from the dropdown list 
 
    .. figure:: images/appmonitoring4.png
 
-#. Fill in the rest of the fields as shown below. The port should be auto-filled with 1433, the standard SQL port. The credentials for the SQL Server deployed in your VM are **username: sa** and **password: Nutanix/1234**. Click on **Test Connection** and then hit **Save** once it is successful. 
+#. Fill in the rest of the fields with the credentials listed below. The port should be auto-filled with 1433, the standard SQL port. Click on **Test Connection** and then hit **Save** once it is successful. 
+
+   - **username: sa** 
+   - **password: Nutanix/1234**.
 
    .. figure:: images/appmonitoring5.png
 
-#. You should see your SQL Server show up under integrations like in the figure. Click on the Server Name(IP) to have a look at what is being collected. 
+#. You should see your SQL Server show up under integrations like in the figure below. Click on the Server Name(IP Address) to have a look at what is being collected. 
 
    .. figure:: images/appmonitoring6.png
 
@@ -70,7 +71,7 @@ Prism Ultimate use ...............................
 
    .. figure:: images/sqlqueries.png
 
-#. Now we will create an alert policy for the **Buffer Pool Size** and a playbook based on that alert so we can see how we can extend the simplicity of our powerful X-Play automation onto applications as well with Prism Ultimate. Scroll down to the **Buffer Pool Size** metric and click on **Actions and choose **alert settings**.
+#. Now we will create an alert policy for the **Buffer Pool Size** and a playbook based on that alert so we can see how we can extend the simplicity of our powerful X-Play automation onto applications as well with Prism Ultimate. Scroll down to the **Buffer Pool Size** metric and click on **Actions** and choose **alert settings**.
 
    .. figure:: images/bufferalert1.png
 
@@ -82,7 +83,7 @@ Prism Ultimate use ...............................
 
    .. figure:: images/sqlplay1.png
 
-#. We need to know the VM IP Address so we can use the out of the box **Powershell** action to run our script. So we will need to create a couple of actions first. The first one will be the extract the lookup the VM IP. Click on **Add Action** and select the **REST API** action.
+#. We have to get the VM IP Address so we can use the out of the box **Powershell** action to run our script. So we will need to create a couple of actions first. The first one will be to the lookup the VM IP. Click on **Add Action** and select the **REST API** action.
 
    .. figure:: images/sqlplay2.png
 
@@ -99,7 +100,7 @@ Prism Ultimate use ...............................
 
    .. figure:: images/sqlplay4.png
 
-#. Use the **Parameter** link to choose the **Response Body** in from the previous action. Add in the following JSON path and fill in the rest of the fields as shown in the figure below. 
+#. Use the **Parameter** link to choose the **Response Body** from the previous action. Add in the following JSON path and fill in the rest of the fields as shown in the figure below. 
 
    - **JSON Path:** ``$.group_results[0].entity_results[0].data[0].values[0].values[0]``
 
@@ -109,8 +110,10 @@ Prism Ultimate use ...............................
 
    .. figure:: images/sqlplay6.png
 
-#. Use the **Parameters** link to get the parsed string from the previous action i.e. the VM IP for the IP Address/Hostname field. Provide the SQL VM credentials which are **Username: Administrator** and **Password: Nutanix/4u**. Provide the folliwng path to script and repalce <Name> with your name so you can recognize your log file in the google drive. 
+#. Use the **Parameters** link to get the parsed string from the previous action i.e. the VM IP for the **IP Address/Hostname** field. Provide the SQL VM credentials listed below. Provide the followng path to script and repalce <Name> with your name so you can recognize your log file in the google drive. 
 
+   - **Username: Administrator** 
+   - **Password: Nutanix/4u**.
    - **JSON Path:** C:\\Users\\Administrator\\Desktop\\UploadToGDrive.ps1 -id <Name>
 
   .. figure:: images/sqlplay7.png
@@ -131,8 +134,10 @@ Prism Ultimate use ...............................
 
   .. figure:: images/sqlplay10.png
 
-#. Now let's trigger the workflow, login into your VM where the SQL Server is running. Credentials - **Username: Administrator** and **Password: Nutanix/4u**. 
-There is a *HammerDB* application already installed on the VM. In order to cause a spike in the metrics we will run a powershell script to create some users on the Server, Go to **PATH** and righy-click on the file **workload.ps1** and select **Run with Powershell** as shown in the figure below. 
+#. Now we will trigger the workflwpw, launch the console for your VM where the SQL Server is running using the credentials listed below. There is a *HammerDB* application already installed on the VM. In order to cause a spike in the metrics we will run a powershell script to create some users on the Server, Go to **Local Disk(C:) > Program Files > HammerDB** and right-click on the file **workload.ps1** and select **Run with Powershell** as shown in the figure below. 
+
+   - **Username: Administrator**
+   - **Password: Nutanix/4u**.
 
  .. figure:: images/hammerdb.png 
 
@@ -142,7 +147,7 @@ There is a *HammerDB* application already installed on the VM. In order to cause
 
   .. figure:: images/sqlemail.png
 
-#. Click on the URL in the email to go to the google drive and confirm that the log file has been uploaded. 
+#. Click on the URL in the email to go to the google drive or go directly to https://drive.google.com/drive/folders/1e4hhdCydQ5pjEKMXUoxe0f35-uYshnLZ?usp=sharing and confirm that the log file has been uploaded. 
 
   .. figure:: images/sqllogfile.png
 
@@ -164,7 +169,7 @@ Prism Ultimate use ...............................
 
  .. figure:: images/appdiscovery2.png
 
-#. Discovery will run and ive you a summary of the apps discovered and identified. You can run **Discover** periodically by coming to this page to identify new apps. 
+#. Discovery will run and give you a summary of the apps discovered and identified. Click on **View App Instances** to view the list. You can run **Discover** periodically by coming to this page to identify new apps. 
 
  .. figure:: images/appdiscovery3.png
 
@@ -176,10 +181,15 @@ Prism Ultimate use ...............................
 
  .. figure:: images/appdiscovery5.png
 
-#. Now you can see the identified app in your list and check that the new idetification policy you created has been added to the **Policies** list. Any future apps with these ports will be identified under the same policy. 
+#. Now you can see the identified app in your list and check that the new identification policy you created has been added to the **Policies** list. Any future apps with these ports will be identified under the same policy. 
 
-**Image**
+ .. figure:: images/appdiscovery6.png
 
-#. Delete your policy so that the other users may setup their own. Go back to the apps list and confirm that the app you ahd idenitified is now **Unknown** again. 
+#. Delete your policy so that the other users may setup their own. Go back to the apps list and confirm that the app you had idenitified is now **Unknown** again. 
 
-**Image** 
+ .. figure:: images/appdiscovery7.png
+
+Takeaways
+.........
+
+- Prism Pro is our solution to make IT OPS smarter and automated. It covers the IT OPS process ranging from intelligent detection to automated remediation.

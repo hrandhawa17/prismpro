@@ -4,11 +4,9 @@ Application Monitoring with Prism Ultimate
 
 .. figure:: images/operationstriangle.png
 
-Prism Pro brings smart automation to our customer’s daily IT operations. The typical operations workflow is a continuous cycle of monitoring, analyzing and taking action where necessary. Prism Pro mirrors traditional IT Admin's workflows to improve operations efficiency. With Prism Pro, IT Admins are able to connect insights from machine data to automate this typical flow using the power of the machine learning engine X-FIT and the X-Play automation engine.
+Prism Pro brings smart automation to our customer’s daily IT operations. With Prism Ultimate we expand this smart automation and intelligent learning to the application and services layers. The typical operations workflow is a continuous cycle of monitoring, analyzing and taking action where necessary. Prism Pro mirrors traditional IT Admin's workflows to improve operations efficiency adn Prism Ultimate combines that with full-stack visibility. With Prism Ultimate, IT Admins are able to connect insights from application machine data to automate this typical flow using the power of the machine learning engine X-FIT and the X-Play automation engine.
 
-**ADD Prism Ultimate/SQL Monitoring note here.** 
-
-In this lab you will learn how Prism Ultimate can help IT Admins monitor, analyze and automatically act when a SQL Server's performance is imapcted.
+In this lab you will learn how Prism Ultimate can help IT Admins monitor, analyze and automatically act when a SQL Server's performance is impacted. You will also see how you can discover applications running on your cluster with Prism Ultimate.
 
 Lab Setup
 +++++++++
@@ -33,7 +31,7 @@ Lab Setup
 SQL Server Monitoring with Prism Ultimate
 +++++++++++++++++++++++++++++++++++++++++++
 
-Prism Ultimate use ...............................
+Prism Ultimate includes the SQL Server monitoring pack which allows IT admin to understand how infrastructure may impact applications and vice versa. This is an agentless solution that gives visibility into databases, queries and SQL metrics and applies the X-FIT behavior learning and anomaly detection capabilities.
 
 
 #. Go to Integrations from the Prism Central home page
@@ -159,7 +157,7 @@ Prism Ultimate use ...............................
 Application Discovery with Prism Ultimate
 +++++++++++++++++++++++++++++++++++++++++++
 
-Prism Ultimate use ...............................
+Prism Ultimate gives the capability to discover applications running on your ESXi cluster to identify applciation to VM dependency and get a view of the full stack. 
 
 #. Using the hamburger menu navigate to **Operations > App Discovery**
 
@@ -192,4 +190,12 @@ Prism Ultimate use ...............................
 Takeaways
 .........
 
-- Prism Pro is our solution to make IT OPS smarter and automated. It covers the IT OPS process ranging from intelligent detection to automated remediation.
+- Prism Ultimate is our solution to being the gap between infrastructure and application and services layers. It covers the IT OPS process ranging from intelligent detection to automated remediation.
+
+- X-FIT is our machine learning engine to support smart IT OPS, including capacity forecasting.
+
+- X-Play, the IFTTT for the enterprise, is our engine to enable the automation of daily operations tasks, making it so easy that automation can be built by every admin.
+
+- Prism Ultimate allows the admin to understand the relationship between their applications and infrastructure with broader visibility and intelligent insights learning. 
+
+- X-Play can be used seamlessly with the Application data monitored via Prism Ultimate to build smart automation that can alert and remediate issues both on the infrastructure and on applications

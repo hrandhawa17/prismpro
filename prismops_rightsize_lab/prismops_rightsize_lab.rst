@@ -59,7 +59,9 @@ Using machine learning, Prism Pro then analyzes the data and applies a classific
 Increase Constrained VM Memory with X-Play based on Conitional Execution
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Now let’s look at how we can take automated action to resolve some of these inefficiencies. For this lab we will assume that this VM is constrained for memory, and will show how we can automatically remediate the right sizing of this VM. We will also use a custom ticket system to give an idea of how this typical workflow could integrate with ticketing system such as ServiceNow and use string parsing and conditional execution, two of our latest capabilities added into X-Play 
+Now let’s look at how we can take automated action to resolve some of these inefficiencies. For this lab we will assume that this VM is constrained for memory, and will show how we can automatically remediate the right sizing of this VM. We will also use a custom ticket system to give an idea of how this typical workflow could integrate with ticketing system such as ServiceNow and use string parsing and conditional execution, two of our latest capabilities added into X-Play. 
+
+Prism Pro now also has the ability to import and export playbooks. The steps to do so for the second playbook created below are listed in the next section. You will need to complete the rest of the steps such as setting up the alert policy and stressing the VM but if you understand how playbooks function and can be created easily you can leverage the file provided in the next section and follow the steps to save some time. We recommend reading through the steps to create trhe playbook and understanding them properly. 
 
 #. Navigate to your **`Initials`-LinuxToolsVM**. The examples will use a VM called **ABC - LinuxToolsVM**. Note the current **Memory Capacity** of the VM, as we will later increase it with X-Play. You may need to scroll down within the **Properties** widget to find this value.
 
@@ -142,7 +144,7 @@ Now let’s look at how we can take automated action to resolve some of these in
 
 
 
-#. Next we will create a custom action to be used in our 2nd playbook. Click on **Action Gallery** from the left hand side menu.
+#. Next we will create a custom action to be used in our 2nd playbook. Click on **Action Gallery** from the left hand side menu. Alternatively, you can skip to the next section to import the playbook needed for this part. You **Will** need to complete the rest of the steps to trigger the workflow. 
 
    .. figure:: images/rs3c.png
 
@@ -237,6 +239,28 @@ Now let’s look at how we can take automated action to resolve some of these in
 #. You should also get an email telling you that the playbook ran.
 
    .. figure:: images/successemail.png
+
+Importing/Exporting Playbooks
++++++++++++++++++++++++++++++++++++++++++++
+
+X-Play now has the ability to import and export playbooks across Prism Centrals. In the example below we will show how to import the playbook that is created in the preceding steps. The user will still need to create the alert policies and go through the workflow to trigger the alert as listed in the steps in the previous section.
+
+#. Go to Playbooks page and click on **Import** 
+
+ .. figure:: images/import0.png
+
+#. You will need to choose the Binary file that you downloaded as the playbook to import. 
+
+ .. figure:: images/import1.png
+
+#. You will see some validation errors since the certain fields such as credentials and URLs will be different for your environment. Click on **Import**, we will resolve these errors in the next step.
+
+ .. figure:: images/import2.png
+
+#. Click on the playbook that has just been imported for you - there will be a time stamp in the playbook name. Once open the you will see that the actions that have validation errors have been highlighted. Even for actions that have not been highlighted make sure to confirm that the information such as **Passwrods**, **URLs** and **IP Addresses** is correct according to your environment. Refer to the playbook creation steps above to confirm these fields. Once you have changed these fields click on **Save & Close**. If validation errors are still present, the pop-up will say so. otherwise remember to click **Enable** and add your Initials to the playbook name before clicking **Save**
+
+ .. figure:: images/rsimport1.png
+
 
 Takeaways
 .........

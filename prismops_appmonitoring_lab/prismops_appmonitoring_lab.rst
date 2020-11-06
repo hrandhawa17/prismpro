@@ -33,6 +33,7 @@ SQL Server Monitoring with Prism Ultimate
 
 Prism Ultimate includes the SQL Server monitoring pack which allows IT admin to understand how infrastructure may impact applications and vice versa. This is an agentless solution that gives visibility into databases, queries and SQL metrics and applies the X-FIT behavior learning and anomaly detection capabilities.
 
+Prism Pro now also has the ability to import and export playbooks. The steps to do so for the playbook created below are listed in the next section. You will need to complete the rest of the steps such as setting up the alert policy and stressing the SQL Server but if you understand how playbooks function and can be created easily you can leverage the file provided in the next section and follow the steps to save some time. We recommend reading through the steps to create trhe playbook and understanding them properly. 
 
 #. Go to Integrations from the Prism Central home page
 
@@ -77,7 +78,7 @@ Prism Ultimate includes the SQL Server monitoring pack which allows IT admin to 
 
    .. figure:: images/bufferalert2.png
 
-#. Now we will create the playbook which we want to execute when this alert policy is triggered. The actions we want to take are running a powershell script on the VM to collect logs and then uploading those logs onto a google drive so we can review what went wrong. Choose Alert as the trigger for your playbook and specifiy the alert policy you just created. 
+#. Now we will create the playbook which we want to execute when this alert policy is triggered. The actions we want to take are running a powershell script on the VM to collect logs and then uploading those logs onto a google drive so we can review what went wrong. Choose Alert as the trigger for your playbook and specifiy the alert policy you just created. You can also skip to the next section to import the playbook the next steps are for, you **Will** need to complete the rest of the steps to trigger the workflow so read through the instructions carefully. 
 
    .. figure:: images/sqlplay1.png
 
@@ -152,6 +153,32 @@ Prism Ultimate includes the SQL Server monitoring pack which allows IT admin to 
 #. Switch back to the previous tab with the Prism Central console open. Open up the details for the **`Initials` - High Buffer Pool Size** Playbook that you created and click the **Plays** tab towards the top of the view to take a look at the Plays that executed for this playbook. The sections in this view can be expanded to show more details for each item. If there were any errors, they would also be surfaced in this view.
 
  .. figure:: images/sqlplay11.png
+
+
+Importing/Exporting Playbooks
++++++++++++++++++++++++++++++++++++++++++++
+
+X-Play now has the ability to import and export playbooks across Prism Centrals. In the example below we will show how to import the playbook that is created in the preceding steps. The user will still need to create the alert policies and go through the workflow to trigger the alert as listed in the steps in the previous section.
+
+#. Go to Playbooks page and click on **Import** 
+
+ .. figure:: images/import0.png
+
+#. You will need to choose the Binary file that you downloaded as the playbook to import. 
+
+ .. figure:: images/import1.png
+
+#. You will see some validation errors since the certain fields such as credentials and URLs will be different for your environment. Click on **Import**, we will resolve these errors in the next step.
+
+ .. figure:: images/import2.png
+
+#. Click on the playbook that has just been imported for you - there will be a time stamp in the playbook name. Once open the you will see that the actions that have validation errors have been highlighted. Even for actions that have not been highlighted make sure to confirm that the information such as **Passwrods**, **URLs** and **IP Addresses** is correct according to your environment. Refer to the playbook creation steps above to confirm these fields
+
+ .. figure:: images/import3.png
+
+#. Once you have changed these fields click on **Save & Close**. If validation errors are still present, the pop-up will say so. otherwise remember to click **Enable** and add your Initials to the playbook name before clicking **Save**
+
+ .. figure:: images/import4.png
 
 
 Application Discovery with Prism Ultimate

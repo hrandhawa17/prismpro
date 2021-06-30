@@ -244,7 +244,7 @@ X-Play now has the ability to import and export playbooks across Prism Centrals.
 
 #. Download the following file which is an export of the playbook you will need. https://drive.google.com/file/d/1f5utfXCp1MJZc-KIxGQwkigkxVnd4OVp/view?usp=sharing
 
-#. Go to Playbooks page and click on **Import**
+#. Go to Playbooks page and click on **Import**.  Please do this from the PC VM IP and not the lab utility server. 
 
  .. figure:: images/import0.png
 

@@ -214,7 +214,7 @@ Import Playbook
 
 #. Within Prism Central, click on :fa:`bars` **Operations > Playbooks**.
 
-#. Select **List** from the left-hand menu, then click on **Import**.
+#. Select **List** from the left-hand menu, then click on **Import**. Please do this from the PC VM IP and not the lab utility server. 
 
 #. Click the **Browse** button, and select the Playbook you previously downloaded, then click **Import**.
 
